@@ -186,34 +186,54 @@
     
     // Function to handle the redirection
     function handleConfirmation() {
-        // 1. Get the fragment (the part after the #) from the URL
-        const fragment = window.location.hash.substring(1);
-        const params = new URLSearchParams(fragment);
-
+        
         const statusTitle = document.getElementById('status-title');
         const statusMessage = document.getElementById('status-message');
         const statusIcon = document.getElementById('status-icon');
         const ctaButton = document.getElementById('cta-button');
 
-        // Check for the error or access_token/code parameter
-        const error = params.get('error');
-        const accessToken = params.get('access_token');
-        const confirmationCode = params.get('code');
+        // --- 1. ROBUSTLY GET URL PARAMETERS (Checks # and ?) ---
+        let urlParams;
+        let redirectFragment = ''; // Holds the raw tokens for redirection
 
+        // Check the fragment (#) first (standard for token-based auth)
+        if (window.location.hash) {
+            redirectFragment = window.location.hash.substring(1);
+            urlParams = new URLSearchParams(redirectFragment);
+        } 
+        // Then, check the query string (?) (required for your current setup)
+        else if (window.location.search) {
+            redirectFragment = window.location.search.substring(1);
+            urlParams = new URLSearchParams(redirectFragment);
+        } 
+        // If neither exists, create an empty Params object
+        else {
+            urlParams = new URLSearchParams('');
+        }
+        
+        // Check for the error or authentication tokens/code
+        const error = urlParams.get('error');
+        const accessToken = urlParams.get('access_token');
+        const confirmationCode = urlParams.get('code'); // This is the key token you are seeing
+
+        // --- 2. HANDLE STATES BASED ON TOKENS FOUND ---
+        
         if (error) {
             // --- HANDLE ERROR STATE ---
             statusTitle.textContent = "Confirmation Failed";
             statusMessage.textContent = "There was an error confirming your account. Please try signing up again.";
-            //statusIcon.textContent = "⚠️";
+            statusIcon.textContent = "⚠️"; // Uncommented the error icon
             ctaButton.textContent = "Back to Strengthy Website";
-            ctaButton.href = "/"; // Link to your main website
+            ctaButton.href = "/";
             ctaButton.style.display = 'inline-flex';
 
         } else if (accessToken || confirmationCode) {
             // --- HANDLE SUCCESS STATE ---
+            statusTitle.textContent = "Account Confirmed!";
+            statusIcon.textContent = "✅"; // Set success icon
             
-            // Construct the full deep link URL using the fragment
-            const deepLinkUrl = `${DEEP_LINK_SCHEME}?${fragment}`;
+            // Construct the full deep link URL, passing the tokens via query string
+            const deepLinkUrl = `${DEEP_LINK_SCHEME}?${redirectFragment}`;
             
             // Attempt to launch the mobile app
             window.location.replace(deepLinkUrl);
@@ -221,20 +241,21 @@
             // Set up a fallback after a short delay (for desktop/launch failure)
             setTimeout(() => {
                 statusMessage.innerHTML = 'If the app did not open automatically, please click the button below or manually open <b>Strengthy</b> on your device.';
-                ctaButton.href = deepLinkUrl; // The button will attempt the deep link again
+                ctaButton.href = deepLinkUrl; // The button attempts the deep link again
                 ctaButton.style.display = 'inline-flex'; 
             }, 1000); 
 
         } else {
-            // --- HANDLE NO TOKEN/INVALID LINK STATE (User just navigated here) ---
+            // --- HANDLE NO TOKEN/INVALID LINK STATE ---
             statusTitle.textContent = "Invalid Link";
             statusMessage.textContent = "This page should only be accessed via the link in your confirmation email.";
-            //statusIcon.textContent = "🔗";
+            statusIcon.textContent = "🔗"; // Set invalid link icon
+            ctaButton.style.display = 'none'; // Hide CTA button for invalid link
         }
     }
 
     // Run the handler when the page loads
     window.onload = handleConfirmation;
-  </script>
+</script>
 </body>
 </html>
