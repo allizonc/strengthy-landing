@@ -161,7 +161,6 @@
       </div>
 
       <div class="content">
-        ``<span id="status-icon" class="status-icon">🏋️</span>``
         <h1 id="status-title">Account Confirmed!</h1>
         <p id="status-message" class="subtitle">
             Your email has been successfully verified. We are now attempting to sign you into the Strengthy app.
@@ -222,7 +221,6 @@
             // --- HANDLE ERROR STATE ---
             statusTitle.textContent = "Confirmation Failed";
             statusMessage.textContent = "There was an error confirming your account. Please try signing up again.";
-            statusIcon.textContent = "⚠️"; // Uncommented the error icon
             ctaButton.textContent = "Back to Strengthy Website";
             ctaButton.href = "/";
             ctaButton.style.display = 'inline-flex';
@@ -230,7 +228,6 @@
         } else if (accessToken || confirmationCode) {
             // --- HANDLE SUCCESS STATE ---
             statusTitle.textContent = "Account Confirmed!";
-            statusIcon.textContent = "✅"; // Set success icon
             
             // Construct the full deep link URL, passing the tokens via query string
             const deepLinkUrl = `${DEEP_LINK_SCHEME}?${redirectFragment}`;
@@ -249,7 +246,6 @@
             // --- HANDLE NO TOKEN/INVALID LINK STATE ---
             statusTitle.textContent = "Invalid Link";
             statusMessage.textContent = "This page should only be accessed via the link in your confirmation email.";
-            statusIcon.textContent = "🔗"; // Set invalid link icon
             ctaButton.style.display = 'none'; // Hide CTA button for invalid link
         }
     }
