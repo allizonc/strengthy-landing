@@ -6,15 +6,15 @@
   <title>Strengthy - Account Confirmed</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
 
     :root {
-      --bg: #f2f2f2;
+      --bg: #f5f5f5;
       --text-primary: #0a0a0a;
-      --text-tertiary: #888888; /* Slightly darker for better readability */
+      --text-secondary: #666666;
       --accent: #0a0a0a;
       --white: #ffffff;
     }
@@ -23,92 +23,85 @@
       font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--text-primary);
-      overflow-x: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 2rem;
+      padding: 1.5rem;
     }
 
     .content-wrapper {
-      max-width: 480px; /* Slightly narrower for a more elegant look */
+      max-width: 440px;
       width: 100%;
       text-align: center;
     }
 
     .content { 
       background: var(--white);
-      padding: 48px 32px;
-      border-radius: 16px; /* Smoother corners */
-      box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-      animation: fadeIn 0.8s ease-out; 
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      animation: fadeIn 0.6s ease-out; 
     }
 
     .logo {
-      display: block;
-      height: 60px; /* Scaled down for professionalism */
-      margin: 0 auto 2.5rem;
-      animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      height: 45px; /* Clean and subtle */
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.5s ease-out forwards;
     }
 
     .logo img { height: 100%; width: auto; }
 
-    @keyframes fadeIn { from {opacity:0} to {opacity:1} }
-    @keyframes fadeInUp {
-      from { opacity:0; transform:translateY(20px) }
-      to   { opacity:1; transform:translateY(0)  }
-    }
-    
     h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.2rem, 4vw, 2.8rem); /* Smaller, more controlled size */
-      letter-spacing: 0.03em;
-      line-height: 1.1;
+      font-size: 2.2rem;
+      letter-spacing: 0.02em;
       margin-bottom: 0.75rem;
       opacity: 0;
-      animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+      animation: fadeInUp 0.5s ease-out 0.2s forwards;
     }
 
     .subtitle {
-      font-size: 0.95rem; /* Tighter body text */
-      line-height: 1.6;
-      color: var(--text-tertiary);
-      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
       opacity: 0;
-      animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
+      animation: fadeInUp 0.5s ease-out 0.3s forwards;
     }
     
     .cta-btn {
         display: inline-flex;
         align-items: center;
-        padding: 14px 28px; /* Slightly more compact */
-        border-radius: 8px; /* Modern square-ish look vs pill */
+        padding: 12px 28px;
+        border-radius: 6px;
         text-decoration: none;
         font-weight: 600;
-        font-size: 0.875rem;
+        font-size: 0.85rem;
         background: var(--accent);
         color: var(--white);
-        transition: all 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
         opacity: 0;
-        animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+        animation: fadeInUp 0.5s ease-out 0.4s forwards;
     }
 
-    .cta-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    .cta-btn:hover { 
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .footer-note {
-      color: var(--text-tertiary);
-      font-size: 0.75rem;
-      margin-top: 1.5rem;
-      letter-spacing: 0.05em;
+      color: #bbbbbb;
+      font-size: 0.7rem;
+      margin-top: 2rem;
       text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 2.2rem; }
+    @keyframes fadeIn { from {opacity:0} to {opacity:1} }
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(15px) }
+      to   { opacity:1; transform:translateY(0)  }
     }
   </style>
 </head>
@@ -119,14 +112,11 @@
     </div>
 
     <div class="content">
-      <h1 id="status-title">Verifying...</h1>
-      <p id="status-message" class="subtitle">Please wait while we confirm your account.</p>
+      <h1 id="status-title">Processing...</h1>
+      <p id="status-message" class="subtitle">Please wait while we verify your account.</p>
 
-      <a id="cta-button" 
-         href="#" 
-         class="cta-btn" 
-         style="display: none;">
-         Open Strengthy App
+      <a id="cta-button" href="#" class="cta-btn" style="display: none;">
+         Open Strengthy
       </a>
     </div>
 
@@ -141,51 +131,38 @@
         const statusMessage = document.getElementById('status-message');
         const ctaButton = document.getElementById('cta-button');
 
-        // Detect if user is on a mobile device
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-        let urlParams;
-        let redirectFragment = '';
-
-        if (window.location.hash) {
-            redirectFragment = window.location.hash.substring(1);
-        } else if (window.location.search) {
-            redirectFragment = window.location.search.substring(1);
-        }
+        // Get tokens from URL (Hash or Query)
+        let redirectFragment = window.location.hash ? window.location.hash.substring(1) : (window.location.search ? window.location.search.substring(1) : '');
+        const urlParams = new URLSearchParams(redirectFragment);
         
-        urlParams = new URLSearchParams(redirectFragment);
         const error = urlParams.get('error');
         const accessToken = urlParams.get('access_token');
         const confirmationCode = urlParams.get('code');
 
         if (error) {
             statusTitle.textContent = "Unable to Verify";
-            statusMessage.textContent = "This link may have expired. Please try signing up again from the app.";
+            statusMessage.textContent = "The link may have expired. Please request a new one from the app.";
         } else if (accessToken || confirmationCode) {
-            statusTitle.textContent = "Account Confirmed";
+            statusTitle.textContent = "Account Verified";
             const deepLinkUrl = `${DEEP_LINK_SCHEME}?${redirectFragment}`;
 
             if (isMobile) {
-                // AUTO-OPEN ONLY ON MOBILE
-                statusMessage.textContent = "Success! Redirecting you to the app...";
-                window.location.replace(deepLinkUrl);
-                
-                // Fallback button if redirect fails
-                setTimeout(() => {
-                    statusMessage.textContent = "If the app didn't open, click the button below.";
-                    ctaButton.href = deepLinkUrl;
-                    ctaButton.style.display = 'inline-flex';
-                }, 2500);
-            } else {
-                // ON DESKTOP: Don't auto-open. Show friendly instructions.
-                statusMessage.innerHTML = "Your account is verified. To start your journey, please open the <b>Strengthy</b> app on your mobile device.";
-                ctaButton.textContent = "Get the App";
-                ctaButton.href = "https://apps.apple.com/app/"; // Update with your actual App Store link
+                // MOBILE LOGIC: Show button immediately + attempt auto-redirect
+                statusMessage.textContent = "Your account is ready. You can now return to the app.";
+                ctaButton.href = deepLinkUrl;
                 ctaButton.style.display = 'inline-flex';
+                
+                // Automatic attempt
+                window.location.replace(deepLinkUrl);
+            } else {
+                // DESKTOP LOGIC: Information only
+                statusMessage.innerHTML = "Success! Your email is verified. Open the <b>Strengthy</b> app on your phone to continue.";
             }
         } else {
-            statusTitle.textContent = "Invalid Request";
-            statusMessage.textContent = "Please use the link provided in your confirmation email.";
+            statusTitle.textContent = "Welcome";
+            statusMessage.textContent = "Use the link in your email to confirm your account.";
         }
     }
 
