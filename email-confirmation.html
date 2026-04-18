@@ -4,26 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Strengthy - Account Confirmed</title>
-  <meta name="description" content="Your Strengthy account has been successfully confirmed.">
-  <meta property="og:title" content="Strengthy - Confirmation Success">
-  <meta property="og:description" content="Your account is now ready to use!">
-  <meta property="og:type" content="website">
-  <link rel="icon" type="image/png" href="/favicon.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ---------------------------------- */
-    /* BASIC STYLES & LAYOUT (FROM INDEX) */
-    /* ---------------------------------- */
     * { margin:0; padding:0; box-sizing:border-box; }
 
     :root {
       --bg: #f2f2f2;
       --text-primary: #0a0a0a;
-      --text-tertiary: #9a9a9a;
+      --text-tertiary: #888888; /* Slightly darker for better readability */
       --accent: #0a0a0a;
       --white: #ffffff;
     }
@@ -33,224 +24,171 @@
       background: var(--bg);
       color: var(--text-primary);
       overflow-x: hidden;
-      position: relative;
-    }
-
-    .container {
-      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 100vh;
       padding: 2rem;
-      position: relative;
-      z-index: 2;
     }
 
     .content-wrapper {
-      /* Reverting to a single column/center layout for a confirmation page */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      max-width: 600px;
+      max-width: 480px; /* Slightly narrower for a more elegant look */
       width: 100%;
       text-align: center;
     }
 
     .content { 
-      animation: fadeIn 0.8s ease-out; 
-      /* Adding a background card effect for better contrast on confirmation message */
       background: var(--white);
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      padding: 48px 32px;
+      border-radius: 16px; /* Smoother corners */
+      box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+      animation: fadeIn 0.8s ease-out; 
     }
 
     .logo {
-      display:block;
-      height: 85px; 
-      margin: 0 auto 2rem; /* Centered margin */
+      display: block;
+      height: 60px; /* Scaled down for professionalism */
+      margin: 0 auto 2.5rem;
       animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    .logo img { height:100%; width:auto; transition:transform 0.3s ease; }
-    
-    .logo:hover img {
-      transform: scale(1.1);
-    }
+    .logo img { height: 100%; width: auto; }
 
     @keyframes fadeIn { from {opacity:0} to {opacity:1} }
     @keyframes fadeInUp {
-      from { opacity:0; transform:translateY(30px) }
-      to  { opacity:1; transform:translateY(0)  }
+      from { opacity:0; transform:translateY(20px) }
+      to   { opacity:1; transform:translateY(0)  }
     }
     
     h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 5vw, 4rem);
-      letter-spacing: 0.05em;
-      line-height: 1;
-      margin-bottom: 0.5rem;
+      font-size: clamp(2.2rem, 4vw, 2.8rem); /* Smaller, more controlled size */
+      letter-spacing: 0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
       opacity: 0;
-      animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
-    }
-
-    .status-icon {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-        display: block;
-        color: var(--accent);
+      animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
     }
 
     .subtitle {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      letter-spacing: 0.02em;
+      font-size: 0.95rem; /* Tighter body text */
+      line-height: 1.6;
       color: var(--text-tertiary);
       margin-bottom: 2rem;
       opacity: 0;
-      animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.6s forwards;
+      animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
     }
     
-    /* Reusing the accent button style for the Call-to-Action */
     .cta-btn {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        padding: 18px 32px;
-        border-radius: 100px;
+        padding: 14px 28px; /* Slightly more compact */
+        border-radius: 8px; /* Modern square-ish look vs pill */
         text-decoration: none;
-        font-weight: 500;
-        font-size: 0.9375rem;
-        gap: 12px;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+        font-weight: 600;
+        font-size: 0.875rem;
         background: var(--accent);
         color: var(--white);
-        border: 2px solid var(--accent);
+        transition: all 0.2s ease;
         opacity: 0;
-        animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.8s forwards;
+        animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
     }
+
     .cta-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        filter: brightness(1.1);
-        border-color: #444;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .footer-note {
       color: var(--text-tertiary);
-      font-size: 0.875rem;
-      margin-top: 1rem;
+      font-size: 0.75rem;
+      margin-top: 1.5rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
-    /* Media queries adjustments */
     @media (max-width: 480px) {
-      .container { padding: 1rem }
-      .content { padding: 25px }
-      h1 { font-size: 2.5rem }
-      .subtitle { font-size: 1.1rem }
+      h1 { font-size: 2.2rem; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="content-wrapper">
-      <div class="logo">
-        <img src="images/icon.png" alt="Strengthy logo" class="logo-img" />
-      </div>
-
-      <div class="content">
-        <h1 id="status-title">Account Confirmed!</h1>
-        <p id="status-message" class="subtitle">
-            Your email has been successfully verified. We are now attempting to sign you into the Strengthy app.
-        </p>
-
-        <a id="cta-button" 
-           href="https://apps.apple.com/app/" 
-           class="cta-btn" 
-           style="display: none;" 
-           aria-label="Open the App">
-           Open Strengthy App
-        </a>
-      </div>
-
-      <p class="footer-note">Created by Allizonc</p>
+  <div class="content-wrapper">
+    <div class="logo">
+      <img src="images/icon.png" alt="Strengthy" />
     </div>
+
+    <div class="content">
+      <h1 id="status-title">Verifying...</h1>
+      <p id="status-message" class="subtitle">Please wait while we confirm your account.</p>
+
+      <a id="cta-button" 
+         href="#" 
+         class="cta-btn" 
+         style="display: none;">
+         Open Strengthy App
+      </a>
+    </div>
+
+    <p class="footer-note">© Strengthy by Allizonc</p>
   </div>
 
-  <script>
-    // Define your mobile app's deep link scheme
+<script>
     const DEEP_LINK_SCHEME = 'strengthy://auth-callback';
     
-    // Function to handle the redirection
     function handleConfirmation() {
-        
         const statusTitle = document.getElementById('status-title');
         const statusMessage = document.getElementById('status-message');
-        const statusIcon = document.getElementById('status-icon');
         const ctaButton = document.getElementById('cta-button');
 
-        // --- 1. ROBUSTLY GET URL PARAMETERS (Checks # and ?) ---
-        let urlParams;
-        let redirectFragment = ''; // Holds the raw tokens for redirection
+        // Detect if user is on a mobile device
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-        // Check the fragment (#) first (standard for token-based auth)
+        let urlParams;
+        let redirectFragment = '';
+
         if (window.location.hash) {
             redirectFragment = window.location.hash.substring(1);
-            urlParams = new URLSearchParams(redirectFragment);
-        } 
-        // Then, check the query string (?) (required for your current setup)
-        else if (window.location.search) {
+        } else if (window.location.search) {
             redirectFragment = window.location.search.substring(1);
-            urlParams = new URLSearchParams(redirectFragment);
-        } 
-        // If neither exists, create an empty Params object
-        else {
-            urlParams = new URLSearchParams('');
         }
         
-        // Check for the error or authentication tokens/code
+        urlParams = new URLSearchParams(redirectFragment);
         const error = urlParams.get('error');
         const accessToken = urlParams.get('access_token');
-        const confirmationCode = urlParams.get('code'); // This is the key token you are seeing
+        const confirmationCode = urlParams.get('code');
 
-        // --- 2. HANDLE STATES BASED ON TOKENS FOUND ---
-        
         if (error) {
-            // --- HANDLE ERROR STATE ---
-            statusTitle.textContent = "Confirmation Failed";
-            statusMessage.textContent = "There was an error confirming your account. Please try signing up again.";
-            ctaButton.textContent = "Back to Strengthy Website";
-            ctaButton.href = "/";
-            ctaButton.style.display = 'inline-flex';
-
+            statusTitle.textContent = "Unable to Verify";
+            statusMessage.textContent = "This link may have expired. Please try signing up again from the app.";
         } else if (accessToken || confirmationCode) {
-            // --- HANDLE SUCCESS STATE ---
-            statusTitle.textContent = "Account Confirmed!";
-            
-            // Construct the full deep link URL, passing the tokens via query string
+            statusTitle.textContent = "Account Confirmed";
             const deepLinkUrl = `${DEEP_LINK_SCHEME}?${redirectFragment}`;
-            
-            // Attempt to launch the mobile app
-            window.location.replace(deepLinkUrl);
 
-            // Set up a fallback after a short delay (for desktop/launch failure)
-            setTimeout(() => {
-                statusMessage.innerHTML = 'If the app did not open automatically, please click the button below or manually open <b>Strengthy</b> on your device.';
-                ctaButton.href = deepLinkUrl; // The button attempts the deep link again
-                ctaButton.style.display = 'inline-flex'; 
-            }, 1000); 
-
+            if (isMobile) {
+                // AUTO-OPEN ONLY ON MOBILE
+                statusMessage.textContent = "Success! Redirecting you to the app...";
+                window.location.replace(deepLinkUrl);
+                
+                // Fallback button if redirect fails
+                setTimeout(() => {
+                    statusMessage.textContent = "If the app didn't open, click the button below.";
+                    ctaButton.href = deepLinkUrl;
+                    ctaButton.style.display = 'inline-flex';
+                }, 2500);
+            } else {
+                // ON DESKTOP: Don't auto-open. Show friendly instructions.
+                statusMessage.innerHTML = "Your account is verified. To start your journey, please open the <b>Strengthy</b> app on your mobile device.";
+                ctaButton.textContent = "Get the App";
+                ctaButton.href = "https://apps.apple.com/app/"; // Update with your actual App Store link
+                ctaButton.style.display = 'inline-flex';
+            }
         } else {
-            // --- HANDLE NO TOKEN/INVALID LINK STATE ---
-            statusTitle.textContent = "Invalid Link";
-            statusMessage.textContent = "This page should only be accessed via the link in your confirmation email.";
-            ctaButton.style.display = 'none'; // Hide CTA button for invalid link
+            statusTitle.textContent = "Invalid Request";
+            statusMessage.textContent = "Please use the link provided in your confirmation email.";
         }
     }
 
-    // Run the handler when the page loads
     window.onload = handleConfirmation;
 </script>
 </body>
